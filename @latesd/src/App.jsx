@@ -1,30 +1,51 @@
 
+import { useState } from "react";
+
+
+
 function Cal() {
-  let buttons = [
-    "AC", "⌫", "%", "÷",
-    "7", "8", "9", "×",
-    "4", "5", "6", "−",
-    "1", "2", "3", "+",
-    "0", ".", "="
+let [displayValue, setDisplayValue] = useState("0");
+
+
+
+
+  let numbers = [
+    "7", "8", "9",
+    "4", "5", "6",
+    "1", "2", "3",
+    "0"
   ];
+
+  let operators = [
+    "+", "−", "×", "÷", "%"
+  ];
+
+  let actions = [
+    "AC", "⌫", ".", "="
+  ];
+
+  
+
+
   return (
     <div className="calculator" >
 
-    <div className="display">0</div>
+    <div className="display">{displayValue}</div>
 
     <div className="buttons">
 
-        {buttons.map((button) => {
-
-          if (button === "+") {
-            console.log("Plus button");
-          } else {
-            console.log("Other button");
-          }
-
-          return <button key={button}>{button}</button>;
+        {actions.map((action) => {
+          return <button key={action}>{action}</button>;
         })}
+        {operators.map((operator) => {
+          return <button className="operator" key={operator}>{operator}</button>;
+        })}
+        {numbers.map((number) => {
+          return <button onClick={() => { setDisplayValue(number) }} key={number}>{number}</button>;
+        })}
+     
 
+  
 
 
       {/* <button class="clear">AC</button>
