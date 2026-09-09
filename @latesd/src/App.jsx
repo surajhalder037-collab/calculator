@@ -4,7 +4,7 @@ import { useState } from "react";
 
 
 function Cal() {
-let [displayValue, setDisplayValue] = useState("0");
+let [displayValue, setDisplayValue] = useState([]);
 
 
 
@@ -35,13 +35,13 @@ let [displayValue, setDisplayValue] = useState("0");
     <div className="buttons">
 
         {actions.map((action) => {
-          return <button key={action}>{action}</button>;
+          return <button onClick={() => { setDisplayValue([""]) }} key={action}>{action}</button>;
         })}
         {operators.map((operator) => {
-          return <button className="operator" key={operator}>{operator}</button>;
+          return <button  className="operator" key={operator}>{operator}</button>;
         })}
         {numbers.map((number) => {
-          return <button onClick={() => { setDisplayValue(number) }} key={number}>{number}</button>;
+          return <button onClick={() => { setDisplayValue([...displayValue, number]) }} key={number}>{number}</button>;
         })}
      
 
