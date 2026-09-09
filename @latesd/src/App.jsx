@@ -4,7 +4,7 @@ import { useState } from "react";
 
 
 function Cal() {
-let [displayValue, setDisplayValue] = useState([]);
+  let [displayValue, setDisplayValue] = useState([]);
 
 
 
@@ -24,33 +24,43 @@ let [displayValue, setDisplayValue] = useState([]);
     "AC", "⌫", ".", "="
   ];
 
-  
+
 
 
   return (
     <div className="calculator" >
 
-    <div className="display">{displayValue}</div>
+      <div className="display">{displayValue}</div>
 
-    <div className="buttons">
+      <div className="buttons">
 
         {actions.map((action) => {
-          return <button onClick={() => { setDisplayValue([""]) }} key={action}>{action}</button>;
+          return <button onClick={() => {
+            if (action === "AC") {
+              { setDisplayValue([""]) }
+            } else if (action === ".") {
+              { setDisplayValue([...displayValue, action]) }
+            }else if(action === "⌫"){
+              setDisplayValue(displayValue.slice(0, -1));
+            }
+          }}
+
+            key={action}>{action}</button>;
         })}
         {operators.map((operator) => {
-          return <button  className="operator" key={operator}>{operator}</button>;
+          return <button onClick={() => { setDisplayValue([...displayValue, operator]) }} className="operator" key={operator}>{operator}</button>;
         })}
         {numbers.map((number) => {
           return <button onClick={() => { setDisplayValue([...displayValue, number]) }} key={number}>{number}</button>;
         })}
-     
-
-  
 
 
-      {/* <button class="clear">AC</button>
+
+
+
+        {/* <button class="clear">AC</button>
         <button></button> */}
-      {/* <button>%</button>
+        {/* <button>%</button>
       <button class="operator">÷</button>
 
       <button>7</button>
@@ -71,9 +81,9 @@ let [displayValue, setDisplayValue] = useState([]);
       <button class="zero">0</button>
       <button>.</button>
       <button class="equal">=</button> */}
-    </div>
+      </div>
 
-  </div >
+    </div >
   );
 }
 export default Cal;
