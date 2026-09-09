@@ -42,6 +42,9 @@ function Cal() {
               { setDisplayValue([...displayValue, action]) }
             }else if(action === "⌫"){
               setDisplayValue(displayValue.slice(0, -1));
+            } else if(action === "="){
+              let ans = eval(displayValue.join(""));
+              setDisplayValue([ans]);
             }
           }}
 
